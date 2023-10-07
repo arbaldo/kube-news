@@ -54,14 +54,14 @@ spec:
         app: web
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
+        prometheus.io/port: "8181"
         prometheus.io/path: "/metrics"
     spec:
       containers:
         - name: web
-          image: fabricioveronez/kube-news:v1
+          image: andrebaldo/kube-news:v1
           ports:
-          - containerPort: 8080
+          - containerPort: 8181
           env:
           - name: DB_DATABASE
             value: "kubenews"
@@ -81,5 +81,6 @@ spec:
     app: web
   ports:
     - port: 80
-      targetPort: 8080
-  type: LoadBalancer
+      targetPort: 8181
+      nodePort: 30001
+  type: NodePort
